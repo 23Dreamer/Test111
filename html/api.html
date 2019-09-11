@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Page Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    .blank{
+      width: 100px;
+      height: 100px;
+      border: 1px solid red;
+    }
+    /* transition transform animate */
+    .transition{
+      width: 100px;
+      height: 100px;
+      background: palevioletred;
+      position: absolute ;
+      bottom: 0px;
+      animation: linear .4s;
+      right: 0px;
+    }
+  
+    @keyframes linear{
+      0%{
+        transform: translateX(100%);
+      }
+      100%{
+        transform: translateX(0%);
+      }
+    }
+  </style>
+</head>
+<body>
+    <div>
+      <img src="./image/1.png" alt="">
+      <button id='fullScreen'>全屏</button>
+      <button id='cancelFullScreen'>取消全屏</button>
+      <button id='isFullScreen'>是否全屏</button>
+      <p data-lalala="这是我的段落" dir="rtl" draggable="true" ondragstart="dragStart(event)" id="drag1">是多少</p>
+      <div class="blank" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+      this <abbr title="by the way">btw</abbr>
+      <acronym title="you are">ya</acronym>
+      
+
+      <!-- transition transform animate -->
+      <!-- <div class="transition"></div> -->
+      <button class="btn">显示/隐藏</button>
+      <div class=" transition"></div>
+    </div>
+    <div class="ui-flex" ></div>
+    <script>
+      document.querySelector('#fullScreen').onclick = function(){
+        document.querySelector('img').webkitRequestFullscreen();
+      }
+      document.querySelector('#cancelFullScreen').onclick = function(){
+        document.querySelector('img').webkitCancelFullScreen();
+      }
+      document.querySelector('#fullScreen').onclick = function(){
+        document.querySelector('img').webkitRequestFullscreen();
+      }
+      document.querySelector('p').onclick = function(e){
+          console.log('e',e.currentTarget==e.target);
+      }
+
+      function dragStart(e){
+          e.dataTransfer.setData('Text',e.target.id);
+      }
+
+      function drop(e){
+        console.log('222222');
+        let data = e.dataTransfer.getData('Text');
+        e.target.appendChild(document.getElementById(data));
+        e.preventDefault();
+      }
+
+      function allowDrop(e){
+        console.log('1111');
+        e.preventDefault();
+      }
+
+
+      // transition transform animate
+      let x = -100;
+      document.querySelector('.transition').onclick = function(e){
+        e.target.style.transform = `translateX(${x}px)`;
+      }
+      let transition = document.querySelector('.transition');
+      transition.style.display = 'none';
+      document.querySelector('.btn').onclick = function(e){
+         if(transition.style.display=='none'){
+           transition.style.display = 'block';
+         }else{
+          transition.style.display = 'none';
+         }
+      }
+    </script>
+</body>
+</html>

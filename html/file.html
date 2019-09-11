@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Page Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+  <input type="file" name="" id="fileInput">
+  <img src="" alt="" style="width:100px;height:100px;">
+  <script>
+    let fileInput = document.getElementById('fileInput');
+    fileInput.onchange = function(){
+      let file = new FileReader();
+      file.readAsDataURL(fileInput.files[0]);
+      file.onload = function(){
+        document.querySelector('img').src = file.result;
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    input[type='checkbox']{
+     
+      position: absolute;
+      z-index: -1;
+      opacity: 0;
+    }
+    .check-label{
+      display: flex;
+      width:9em;
+      height: 5em;
+      background: purple;
+      border-radius: 2.5em;
+      align-items: center;
+      transition: all .4s ease;
+      /* justify-content: center; */
+    }
+    .circle{
+      display: flex;
+      width: 4em;
+      height: 4em;
+      background: paleturquoise;
+      border-radius: 50%;
+      margin-left: 10%;
+      align-items: center;
+      justify-content: center;
+      transition: all .4s ease;
+      box-shadow: 0 0 10px;
+    }
+    .circle:before{
+      content: '×';
+      color: white;
+      font-size: 2em;
+    }
+
+    input[type='checkbox']:checked{
+      background: green;
+    }
+    input[type='checkbox']:checked + .check-label{
+      background: green;
+    }
+    input[type='checkbox']:checked + .check-label .circle{
+      background: yellow;
+      margin-left: 50%;
+    }
+    input[type='checkbox']:checked + .check-label .circle:before{
+      content: '✔';
+      color: black;
+    }
+  
+  </style>
+</head>
+<body>
+  <div>
+    gerge
+    <input type="checkbox" id="switch">
+    <label for="switch" class="check-label">
+      <span class="circle"></span>
+    </label>
+  </div>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .transform {}
+    </style>
+</head>
+
+<body>
+    <div class="tranform">
+
+    </div>
+    <script>
+        for (var i = 0; i < 5; i++) {
+            setTimeout(() => {
+                console.log(i)
+            }, 1000)
+        }
+        console.log(i)
+
+        var output = function(i) {
+            setTimeout(() => {
+                console.log(i)
+            }, 1000);
+        }
+        for (var i = 0; i < 5; i++) {
+            output(i);
+        }
+        console.log(i)
+
+
+        var a = [];
+        for (var i = 0; i < 10; i++) {
+            a[i] = function() {
+                console.log(i);
+            };
+        }
+        a[6](); // 10
+    </script>
+</body>
+
+</html>

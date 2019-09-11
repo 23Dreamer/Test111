@@ -1,0 +1,56 @@
+<!-- <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<style>
+* {
+    margin: 0;
+    padding: 0;
+}
+.scroll{
+    margin-top:  20px;
+    border: 2px solid #00f;
+    height: 200px;
+}
+</style>
+</head>
+<body>
+<div class="scroll">
+    <ul>
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+      <li>4</li>
+      <li>5</li>
+      <li>6</li>
+      <li>7</li>
+    </ul>
+</div>
+<script>
+    window.onscroll= function(){
+        // var str = '';
+        // // str += window.scrollY+",";//ie不支持。
+        // str += "("+document.documentElement.scrollHeight+","+document.body.scrollHeight+"),";
+        // str += "("+window.pageYOffset+","+document.documentElement.scrollTop+","+document.body.scrollTop+"),";
+        // str += "("+window.innerHeight+","+document.documentElement.clientHeight+","+document.body.clientHeight+"),";
+        // document.getElementById('js_con').innerHTML = str;
+
+         //文档内容实际高度（包括超出视窗的溢出部分）
+         var scrollHeight = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight);
+        //滚动条滚动距离
+        var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+        //窗口可视范围高度
+        var clientHeight = window.innerHeight || Math.min(document.documentElement.clientHeight,document.body.clientHeight);
+        console.log(clientHeight + scrollTop);
+        console.log(scrollHeight);
+        if(clientHeight + scrollTop >= scrollHeight){
+            
+            console.log("===加载更多内容……===");
+        }
+    }
+</script>
+</body>
+</html>

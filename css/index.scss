@@ -1,0 +1,40 @@
+@for $i from 1 through 50{
+  .ui-size-#{$i}{
+    font-size: 1px * $i;
+  }
+}
+
+@for $i from 1 through 50{
+  .ui-pdl-#{$i}{
+    padding-left: 1px*$i;
+  }
+}
+
+// 变量
+$blue:#00f;
+$margin:16px;
+.content-navigation{
+  border-color: $blue;
+  color: darken($blue, 9%);
+}
+
+// mixin ,用 @include 调用
+@mixin left{
+  padding-left: 10px;
+  float: left;
+}
+
+div{
+  @include left;
+}
+
+
+@mixin right($value:10px) {
+  padding-left: $value;
+  float: left;
+}
+
+div{
+  @include right(20px);
+}
+

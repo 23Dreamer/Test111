@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        /* #rectangle {
+            width: 100px;
+            height: 200px;
+            background: tomato;
+            margin: 100px auto;
+        } */
+        /* 样式初始化 */
+        
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        html,
+        body {
+            width: 100%;
+        }
+        
+        aside {
+            height: 100%;
+            width: 100%;
+        }
+        /* 列表的父盒子，限制宽高 */
+        /* 注意设置overflow: hidden;样式后，超出这个盒子的ul将不会显示 */
+        
+        .draw {
+            width: 60px;
+            height: 500px;
+            border: 2px solid #ccc;
+            overflow: hidden;
+            position: fixed;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        /* li 设置了浮动， 所以 ul 要清除浮动 */
+        
+        ul:after {
+            content: "";
+            display: block;
+            visibility: hidden;
+            height: 0;
+            clear: both;
+        }
+        
+        ul {
+            zoom: 1;
+        }
+        
+        li {
+            list-style: none;
+            float: left;
+            width: 60px;
+            height: 60px;
+            line-height: 60px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="rectangle">
+
+    </div>
+    <aside class="main">
+        <div class="draw" id="draw">
+            <ul>
+                <li style="background: turquoise"></li>
+                <li style="background:tan"></li>
+                <li style="background:sienna"></li>
+                <li style="background:seagreen"></li>
+                <li style="background:slateblue"></li>
+                <li style="background:salmon"></li>
+                <li style="background:springgreen"></li>
+            </ul>
+        </div>
+    </aside>
+
+    <script>
+        const rectangle = document.getElementById('rectangle')
+        rectangle.addEventListener('touchstart', e => {
+            console.log(e)
+        })
+
+        // 手指移动
+        const draw = document.getElementById('draw');
+        const ul = draw.children[0];
+        var maxDown = 50; // 设定一个最大向下滑动的距离
+        let startY = 0; // 刚触碰到屏幕的时的手指信息
+        var centerY = 0; // 用来记录每次触摸时上一次的偏移距离
+
+        ul.addEventListener('touchstart', e => {
+            startY = e.changedTouches[0].clientY;
+        })
+
+        ul.addEventListener('touchmove', e => {
+                let dy = e.changedTouches[0].clientY - startY;
+                let tempy = centerY + dy;
+                tempy = tempy > 50 ? 50 : tempy || tempy < -50 ? -50 : tempy;
+                ul.style.transform = `translateY(${tempy}px)`;
+                ul.style.transition = `all 0.5s`;
+            })
+            // touchend 时，记录此时手指在 Y 轴上的落点距离可视顶部距离
+        ul.addEventListener('touchend', e => {
+            // 获取差值
+            let dy = e.changedTouches[0].clientY - startY;
+            // 记录移动的距离
+            centerY = centerY + dy;
+        })
+    </script>
+</body>
+
+</html>

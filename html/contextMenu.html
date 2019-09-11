@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div style="position:relative">
+    <div class='child' style='width: 100px;height: 100px;background:black;display: flex;'></div>
+    <!-- <div class='menu' style='width: 100px;height: 100px;background: red;visibility: hidden;position: absolute;'></div> -->
+  </div>
+  <script>
+    window.currentElement = null;
+
+    var EventUtil = {
+      addHandler: function (element, type, handler) {
+        if (element.addEventListener) { //DOM2级
+          element.addEventListener(type, handler, false);
+
+        } else if (element.attachEvent) { //DOM1级
+          element.attachEvent("on" + type, handler);
+
+        } else {
+          element["on" + type] = handler; //DOM0级
+        }
+      },
+      getEvent:function(event){
+        return event?event:window.event;
+      },
+      preventDefault:function(event){
+        if(event.preventDefault){
+          event.preventDefault();
+        }else{
+          event.returnValue = false;
+        }
+      }
+    }
+    EventUtil.addHandler(window, 'load', function () {
+      let child = document.querySelector('.child');
+      EventUtil.addHandler(child, 'contextmenu', function () {
+        let e = EventUtil.getEvent();
+        EventUtil.preventDefault(e);
+
+        let arr = [12,2,3,4,3];
+        const li = arr.reduce((pre,cur)=>{
+          pre += `<li>232323</li>`
+          return pre;
+        },'')
+
+        let ul = document.createElement('ul');
+        ul.innerHTML = `${li}`;
+        ul.style.width = '100px';
+        ul.style.height = '100px';
+        ul.style.background = 'red';
+        ul.style.position = 'absolute';  
+        ul.style.left = `${e.pageX}px`;      
+        ul.style.top = `${e.pageY}px`;      
+        document.body.appendChild(ul);
+        currentElement = ul;        
+      })
+
+      EventUtil.addHandler(document, 'click', function () {
+        currentElement&&document.body.removeChild(currentElement);
+      })
+    })
+  </script>
+</body>
+
+</html>

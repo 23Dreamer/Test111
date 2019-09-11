@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Page Title</title>
+  <style>
+  </style>
+  <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
+  </script>
+</head>
+
+<body>
+  <div>
+    <button>显示</button>
+  </div>
+  <script>
+    $.open = function (co) {
+      var config = co;
+      var mianji = config.width * config.height;
+      if ($('.dialog').length) {
+        return;
+      }
+      let dialog = $("<div class='dialog'></div>");
+      dialog.css('width', config.width);
+      dialog.css('height', config.height);
+      dialog.css('backgroundColor', config.backgroundColor);
+      $('body').append(dialog);  
+      let option = {
+        alertOption:function(aaFn){
+          aaFn(config)
+        },
+        setWidth:function(newWidth){
+          config.width = newWidth;
+          dialog.css('width', config.width);
+        },
+        addWidth:function(addWidth){
+          this.setWidth(addWidth+config.width)
+        },
+        getMianji: function () {
+          return mianji;
+        }
+      }
+      return option;
+    }
+    $('button').click(function () {
+      let config = {
+        width: 400,
+        height: 200,
+        backgroundColor: 'red'
+      }
+      var dialog = $.open(config);
+
+      let aaFn = function (config) {
+       console.log(config)
+      }
+
+      dialog.alertOption(aaFn);
+      // dialog.setWidth(600);
+      dialog.addWidth(200);
+      console.log(dialog.getMianji());
+    })
+  </script>
+</body>
+
+</html>

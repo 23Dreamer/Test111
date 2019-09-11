@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .loading {
+            width: 100%;
+            height: 44px;
+            background: rgba(232, 133, 231, 0.3);
+            display: none;
+        }
+        
+        @keyframes touchLoading {
+            0% {
+                transform: translateY(100%)
+            }
+            100% {
+                transform: translateY(0%)
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="loading" id="loading"></div>
+    <script>
+        let centerY = 0;
+        let startY = 0;
+        let loading = document.getElementById('loading');
+        document.addEventListener('touchstart', e => {
+            startY = e.changedTouches[0].clientY;
+        })
+        document.addEventListener('touchmove', e => {
+            let dy = e.changedTouches[0].clientY - startY;
+            let show = dy > 10 ? 'block' : 'none';
+            loading.style.display = show;
+            loading.style.animation = 'touchLoading'
+        })
+    </script>
+</body>
+
+</html>
